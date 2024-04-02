@@ -37,4 +37,3 @@ app.use('/blog', blogRoutes);
 
 // Listin
 app.listen(PORT, () => console.log(`The Server started at ${PORT}`));
-
