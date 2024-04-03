@@ -7,9 +7,11 @@ const blogRoutes = require('./routes/blog');
 const cookieParser = require("cookie-parser");
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
 
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger-output.json')
 
 const app = express();
-PORT = process.env.PORT || 3001
+PORT = process.env.PORT
 
 // DB Connectiom
 mongoose.connect(process.env.DB_URL)
@@ -34,7 +36,7 @@ app.set("view engine", "ejs");
 app.use('/user', userRoutes);
 app.use('/blog', blogRoutes);
 
-
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 // Listin
 app.listen(PORT, () => console.log(`The Server started at ${PORT}`));
 
